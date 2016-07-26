@@ -32,6 +32,8 @@ namespace PedidosEDISAE
             //Abrir Transaccion
             //Ejecutar instrucciones SQL
             //Cerrar transaccion
+
+            //esto es ta chafa
             return errores;
         }
     }
