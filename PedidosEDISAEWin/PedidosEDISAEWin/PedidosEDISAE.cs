@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using PedidosEDISAE;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace PedidosEDISAEWin
 {
@@ -85,11 +86,6 @@ namespace PedidosEDISAEWin
             //Llamada a proceso de carga de archivos
             List<string> errores = ProcesadorPedidosEDISAE.ProcesaPedidos(listaArchivos);
 
-            errores = new List<string>();
-            errores.Add("Test1");
-            errores.Add("TestX");
-            errores.Add("Testfg");
-
             //Mostrar errores al usuario en ventana especial:
             if (errores.Count > 0)
             {
@@ -105,6 +101,18 @@ namespace PedidosEDISAEWin
         private void btnRefrescar_Click(object sender, EventArgs e)
         {
             CargarRuta(txtRuta.Text);
+        }
+
+        private void linkCarpetaRegistro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + "PedidosEDISAE");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }

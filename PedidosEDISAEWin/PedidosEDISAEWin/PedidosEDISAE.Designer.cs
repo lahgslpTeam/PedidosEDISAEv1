@@ -36,6 +36,7 @@
             this.grpListaDeArchivos = new System.Windows.Forms.GroupBox();
             this.listArchivosXml = new System.Windows.Forms.ListView();
             this.btnRefrescar = new System.Windows.Forms.Button();
+            this.linkCarpetaRegistro = new System.Windows.Forms.LinkLabel();
             this.grpListaDeArchivos.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,11 +116,24 @@
             this.btnRefrescar.UseVisualStyleBackColor = true;
             this.btnRefrescar.Click += new System.EventHandler(this.btnRefrescar_Click);
             // 
+            // linkCarpetaRegistro
+            // 
+            this.linkCarpetaRegistro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkCarpetaRegistro.AutoSize = true;
+            this.linkCarpetaRegistro.Location = new System.Drawing.Point(12, 253);
+            this.linkCarpetaRegistro.Name = "linkCarpetaRegistro";
+            this.linkCarpetaRegistro.Size = new System.Drawing.Size(170, 13);
+            this.linkCarpetaRegistro.TabIndex = 5;
+            this.linkCarpetaRegistro.TabStop = true;
+            this.linkCarpetaRegistro.Text = "Ver carpeta de registro de eventos";
+            this.linkCarpetaRegistro.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCarpetaRegistro_LinkClicked);
+            // 
             // PedidosEDISAE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(559, 288);
+            this.Controls.Add(this.linkCarpetaRegistro);
             this.Controls.Add(this.btnRefrescar);
             this.Controls.Add(this.grpListaDeArchivos);
             this.Controls.Add(this.btnSeleccionRuta);
@@ -145,6 +159,7 @@
         private System.Windows.Forms.GroupBox grpListaDeArchivos;
         private System.Windows.Forms.ListView listArchivosXml;
         private System.Windows.Forms.Button btnRefrescar;
+        private System.Windows.Forms.LinkLabel linkCarpetaRegistro;
     }
 }
 

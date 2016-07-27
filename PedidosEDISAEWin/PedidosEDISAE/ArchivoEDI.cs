@@ -7,12 +7,13 @@ namespace PedidosEDISAE
     class ArchivoEDI
     {
         public string NombreArchivo { get; set; }
-
+        public DateTime FechaPedido { get; set; }
         public List<PedidoEDI> Pedidos { get; set; }
 
         public ArchivoEDI(string nombreArchivo)
         {
             NombreArchivo = nombreArchivo;
+            FechaPedido = DateTime.Now;
             Pedidos = new List<PedidoEDI>();
         }
 

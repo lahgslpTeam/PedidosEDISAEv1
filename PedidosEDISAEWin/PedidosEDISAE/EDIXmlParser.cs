@@ -105,7 +105,7 @@ namespace PedidosEDISAE
                     Cantidad = 0;
                     errorEnNodo = true;
                     errores++;
-                    Registrador.RegistrarError("Formato de número incorrecto en nodo FST01. " + linNode.OuterXml);
+                    Registrador.RegistrarError("Formato de número incorrecto en nodo FST01. " + linNode.OuterXml + ". Excepcion: " + e.Message);
                 }
             }
             else
