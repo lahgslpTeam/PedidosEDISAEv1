@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
 using System.IO;
+using System.Collections;
 
 namespace PedidosEDISAE
 {
@@ -10,7 +11,19 @@ namespace PedidosEDISAE
     {
         static public List<string> ProcesaPedidos(List<string> archivosEDI)
         {
+            Hashtable TiemposNormativos;
+            
             RegistroEjecucionArchivo registrador = new RegistroEjecucionArchivo(ConfigurationManager.AppSettings["ArchivoEjecucionNombre"] + DateTime.Now.ToString(ConfigurationManager.AppSettings["ArchivoEjecucionFormatoFecha"]));
+            try
+            {
+                TiemposNormativos = CargadorTiemposNormativos.ObtenerTiempos();
+            }
+            catch (Exception e)
+            {
+                registrador.RegistrarError(e.Message);
+                return registrador.Errores();
+            }
+
             registrador.Registrar("Pedidos EDI - SAE. Carga iniciada en " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine);
             int contadorArchivos = 1;
             foreach (string archivo in archivosEDI)
@@ -24,7 +37,7 @@ namespace PedidosEDISAE
                     //No hubo errores
                     EDICargadorBD cargador = new EDICargadorBD(ConfigurationManager.ConnectionStrings["ArtluxSAE"].ConnectionString, registrador);
                     registrador.Registrar("Paso 2. Iniciando carga de archivo a SAE...");
-                    if (cargador.CargarArchivoEDIaBD(parser.Archivo) == 0)
+                    if (cargador.CargarArchivoEDIaBD(parser.Archivo, TiemposNormativos) == 0)
                     {
                         registrador.Registrar("Carga a SAE completada exitosamente");
                         //Mover archivo procesado a folder "RutaDestino"

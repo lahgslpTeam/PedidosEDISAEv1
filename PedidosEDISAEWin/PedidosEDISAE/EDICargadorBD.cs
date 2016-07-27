@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace PedidosEDISAE
 {
@@ -15,7 +16,7 @@ namespace PedidosEDISAE
             CadenaConexion = cadenaConexion;
         }
 
-        public int CargarArchivoEDIaBD(ArchivoEDI archivo)
+        public int CargarArchivoEDIaBD(ArchivoEDI archivo, Hashtable TiemposNormativos)
         {
             int errores = 0;
             //Recorrer pedidos incluidos en el archivo

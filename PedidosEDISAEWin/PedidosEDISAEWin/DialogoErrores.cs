@@ -37,6 +37,7 @@ namespace PedidosEDISAEWin
 
         private void DialogoErrores_Load(object sender, EventArgs e)
         {
+            this.txtErrores.Text = "";
             foreach (string error in Errores)
             {
                 this.txtErrores.Text += error + Environment.NewLine;

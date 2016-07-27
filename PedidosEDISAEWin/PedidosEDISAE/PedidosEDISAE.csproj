@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchivoEDI.cs" />
+    <Compile Include="CargadorTiemposNormativos.cs" />
     <Compile Include="EDICargadorBD.cs" />
     <Compile Include="EDIXmlParser.cs" />
     <Compile Include="IRegistroEjecucion.cs" />
