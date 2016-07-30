@@ -34,7 +34,7 @@ namespace PedidosEDISAE
             {
                 int partida = 1;
                 long Id_Bitacora = 0;
-                long NuevoIdentificador = 0, id_observacion = 0;
+                long NuevoIdentificador = 0, id_observacion = 0, id_InformacionEnvio = 0;
                 decimal Subtotal, SubTotal_Impuesto;
                 string Cve_Doc = "", ClaveArticulo = "";
                 DateTime Fecha_Documento, Fecha_entrega;
@@ -79,7 +79,11 @@ namespace PedidosEDISAE
 
                         //Se actualiza el campo 'pendientes por surtir' en el inventario
                         Registros_afectados += this.Actualiza_Inventario(fbComando, producto, ClaveArticulo, producto.Cantidad);
-                        Registros_afectados += this.Actualiza_Control_tablas(fbComando, 56, id_observacion);
+                        Registros_afectados += this.Actualiza_Control_tablas(fbComando, 56, id_observacion);//Clave 56 para obs_docf01
+
+                        id_InformacionEnvio = this.Agrega_Informacion_Envio(fbComando, dtAgencia, Fecha_entrega);
+                        Registros_afectados += id_InformacionEnvio > 0 ? 1 : 0;
+                        Registros_afectados += this.Actualiza_Control_tablas(fbComando, 70, id_InformacionEnvio);//Clave 70 para Infoenvio01
 
                         partida++;
                     }
@@ -88,7 +92,7 @@ namespace PedidosEDISAE
                     Id_Bitacora = this.Agrega_registroBitacora(fbComando, Cve_Doc, Subtotal + SubTotal_Impuesto, Clave_vendedor, ClaveCliente, "Carga desde XML");
                     Registros_afectados += Id_Bitacora > 0 ? 1 : 0;
 
-                    Registros_afectados += this.Actualiza_Control_tablas(fbComando, 62, Id_Bitacora);
+                    Registros_afectados += this.Actualiza_Control_tablas(fbComando, 62, Id_Bitacora);//Clave 62 para Bita01
 
                     //No puedo seguir tu recomendacion de insertar al inicio el pedido, es necesario insertar aqui el pedido despues insertar las partidas y la bitacora
                     Registros_afectados += this.Agrega_maestro_dePedido(fbComando, Cve_Doc);
@@ -531,6 +535,63 @@ namespace PedidosEDISAE
             }
 
 
+        }
+
+        private long Agrega_Informacion_Envio(FbCommand fbComando, DataTable dtCliente, DateTime FechaEnvio)
+        {
+            if (dtCliente == null || dtCliente.Rows.Count <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                string Texto_sql = "select max(CVE_INFO)+ 1 from INFENVIO" + this.Num_Empresa + " ";
+
+                fbComando.CommandText = Texto_sql;
+                object Nuevo_id_InfoEnvio = fbComando.ExecuteScalar();
+                Nuevo_id_InfoEnvio = Nuevo_id_InfoEnvio == DBNull.Value ? 1 : (long)Nuevo_id_InfoEnvio;
+
+                Texto_sql = " insert into INFENVIO" + this.Num_Empresa + " ( ";
+                Texto_sql += "   CVE_INFO,CVE_CONS,NOMBRE,CALLE,NUMINT,NUMEXT,CRUZAMIENTOS,CRUZAMIENTOS2,POB,CURP,REFERDIR,CVE_ZONA,CVE_OBS,STRNOGUIA,STRMODOENV";
+                Texto_sql += "   ,FECHA_ENV,NOMBRE_RECEP,NO_RECEP,FECHA_RECEP,COLONIA,CODIGO,ESTADO,PAIS,MUNICIPIO";
+                Texto_sql += " ) values (";
+                Texto_sql += "    @CVE_INFO,@CVE_CONS,@NOMBRE,@CALLE,@NUMINT,@NUMEXT,@CRUZAMIENTOS,@CRUZAMIENTOS2,@POB,@CURP,@REFERDIR,@CVE_ZONA,@CVE_OBS,@STRNOGUIA,@STRMODOENV";
+                Texto_sql += "   ,@FECHA_ENV,@NOMBRE_RECEP,@NO_RECEP,@FECHA_RECEP,@COLONIA,@CODIGO,@ESTADO,@PAIS,@MUNICIPIO";
+                Texto_sql += " )";
+
+                fbComando.Parameters.AddWithValue("@CVE_INFO", Nuevo_id_InfoEnvio);
+                fbComando.Parameters.AddWithValue("@CVE_CONS", dtCliente.Rows[0]["CLAVE"]);
+                fbComando.Parameters.AddWithValue("@NOMBRE", dtCliente.Rows[0]["NOMBRE"]);
+                fbComando.Parameters.AddWithValue("@CALLE", dtCliente.Rows[0]["CALLE"]);
+                fbComando.Parameters.AddWithValue("@NUMINT", dtCliente.Rows[0]["NUMINT"]);
+                fbComando.Parameters.AddWithValue("@NUMEXT", dtCliente.Rows[0]["NUMEXT"]);
+                fbComando.Parameters.AddWithValue("@CRUZAMIENTOS", dtCliente.Rows[0]["CRUZAMIENTOS"]);
+                fbComando.Parameters.AddWithValue("@CRUZAMIENTOS2", dtCliente.Rows[0]["CRUZAMIENTOS2"]);
+                fbComando.Parameters.AddWithValue("@POB", dtCliente.Rows[0]["POB"]);
+                fbComando.Parameters.AddWithValue("@CURP", dtCliente.Rows[0]["CURP"]);
+                fbComando.Parameters.AddWithValue("@REFERDIR", dtCliente.Rows[0]["REFERDIR"]);
+                fbComando.Parameters.AddWithValue("@CVE_ZONA", dtCliente.Rows[0]["CVE_ZONA"]);
+                fbComando.Parameters.AddWithValue("@CVE_OBS", 0);
+                fbComando.Parameters.AddWithValue("@STRNOGUIA", dtCliente.Rows[0]["STRNOGUIA"]);
+                fbComando.Parameters.AddWithValue("@STRMODOENV", dtCliente.Rows[0]["STRMODOENV"]);
+                fbComando.Parameters.AddWithValue("@FECHA_ENV", FechaEnvio);
+                fbComando.Parameters.AddWithValue("@NOMBRE_RECEP", dtCliente.Rows[0]["NOMBRE_RECEP"]);
+                fbComando.Parameters.AddWithValue("@NO_RECEP", dtCliente.Rows[0]["NO_RECEP"]);
+                fbComando.Parameters.AddWithValue("@FECHA_RECEP", dtCliente.Rows[0]["FECHA_RECEP"]);
+                fbComando.Parameters.AddWithValue("@COLONIA", dtCliente.Rows[0]["COLONIA"]);
+                fbComando.Parameters.AddWithValue("@CODIGO", dtCliente.Rows[0]["CODIGO"]);
+                fbComando.Parameters.AddWithValue("@ESTADO", dtCliente.Rows[0]["ESTADO"]);
+                fbComando.Parameters.AddWithValue("@PAIS", dtCliente.Rows[0]["PAIS"]);
+                fbComando.Parameters.AddWithValue("@MUNICIPIO", dtCliente.Rows[0]["MUNICIPIO"]);
+
+
+                fbComando.CommandText = Texto_sql;
+                fbComando.ExecuteNonQuery();
+
+                fbComando.CommandText = "";
+                fbComando.Parameters.Clear();
+                return (long)Nuevo_id_InfoEnvio;
+            }
         }
 
     }
