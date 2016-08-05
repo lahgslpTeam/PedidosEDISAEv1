@@ -8,6 +8,8 @@ namespace PedidosEDISAE
     {
         void Registrar(string evento);
         void RegistrarError(string error);
+        void RegistrarAdvertencia(string advertencia);
         List<string> Errores();
+        List<string> Advertencias();
     }
 }

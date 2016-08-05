@@ -9,6 +9,7 @@ namespace PedidosEDISAE
     {
         string NombreArchivo;
         List<string> ListaErrores;
+        List<string> ListaAdvertencias;
 
         public RegistroEjecucionArchivo(string nombreArchivo)
         {
@@ -55,5 +56,15 @@ namespace PedidosEDISAE
         {
             return ListaErrores;
         }
+
+        public void RegistrarAdvertencia(string advertencia) {
+
+        }
+
+        public List<string> Advertencias()
+        {
+            return ListaAdvertencias;
+        }
+
     }
 }
