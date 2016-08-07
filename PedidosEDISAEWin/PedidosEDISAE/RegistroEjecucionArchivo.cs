@@ -15,6 +15,7 @@ namespace PedidosEDISAE
         {
             NombreArchivo = nombreArchivo;
             ListaErrores = new List<string>();
+            ListaAdvertencias = new List<string>();
         }
 
         public void Registrar(string evento)
@@ -57,8 +58,11 @@ namespace PedidosEDISAE
             return ListaErrores;
         }
 
-        public void RegistrarAdvertencia(string advertencia) {
-
+        public void RegistrarAdvertencia(string advertencia)
+        {
+            string textoAdvertencia = "ADVERTENCIA: " + advertencia;
+            Registrar(textoAdvertencia);
+            ListaAdvertencias.Add(textoAdvertencia);
         }
 
         public List<string> Advertencias()

@@ -37,7 +37,14 @@ namespace PedidosEDISAE
             {
                 //Conectarse a Base de Datos
                 fbConexion = new FbConnection(this.CadenaConexion);
-                fbConexion.Open();
+                try
+                {
+                    fbConexion.Open();
+                }
+                catch (Exception openConnExc)
+                {
+                    throw new Exception("Error al conectar con Base de Datos. Validar cadena de conexión o contactar a soporte: " + ConfigurationManager.AppSettings["CorreoSoporte"] + ". " + openConnExc.Message);
+                }
                 //Iniciar Transaccion 
                 fbTransaccion = fbConexion.BeginTransaction("Transaccion_InsertaPedidos");
 
@@ -52,16 +59,17 @@ namespace PedidosEDISAE
                     decimal Subtotal = 0, SubTotal_Impuesto = 0;
                     DataTable dtAgencia = null;
                     string Cve_Doc = "";
-                    string MensajeNoPocesar = "";
+                    string MensajeNoProcesado = "";
                     bool procesar = true;
 
                     try
                     {
                         dtAgencia = this.ObtenCliente(fbConexion, fbTransaccion, pedido.NumeroAgencia);
                     }
-                    catch(Exception ex) {
-                        procesar = false; 
-                        MensajeNoPocesar="El pedido de la agencia con clave: '"+pedido.NumeroAgencia.ToString()+"' no se proceso debido a ' " + ex.Message +" ' " ;
+                    catch(Exception ex)
+                    {
+                        procesar = false;
+                        MensajeNoProcesado = "El pedido de agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' no procesado debido a '" + ex.Message + "'.";
                     }
 
 
@@ -105,11 +113,13 @@ namespace PedidosEDISAE
                                                                   , (string)dtCliente.Rows[0]["RFC"], Fecha_Documento, Fecha_entrega, id_InformacionEnvio);
                     }
                     else {
+                        string RANs = "";
                         foreach (ProductoEDI producto in pedido.Productos)
                         {
-                            MensajeNoPocesar += " RAN no procesado '" + producto.RAN + "' ";
+                            RANs += producto.RAN + ",";
                         }
-                        Registrador.RegistrarAdvertencia(MensajeNoPocesar);
+                        MensajeNoProcesado += " Números RAN no procesados: " + RANs + ".";
+                        Registrador.RegistrarAdvertencia(MensajeNoProcesado);
                     }
 
                 }

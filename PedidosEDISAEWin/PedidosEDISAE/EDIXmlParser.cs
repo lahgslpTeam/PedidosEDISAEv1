@@ -62,6 +62,7 @@ namespace PedidosEDISAE
         {
             int errores = 0;
             bool errorEnNodo = false;
+            bool agenciaVacia = false;
             XmlNodeList nodoSel;
 
             string NumeroAgencia = "";
@@ -73,12 +74,14 @@ namespace PedidosEDISAE
             if (nodoSel.Count == 1)
             {
                 NumeroAgencia = nodoSel[0].InnerText;
+                if (NumeroAgencia.Trim() == String.Empty)
+                {
+                    agenciaVacia = true;
+                }
             }
             else
             {
-                errorEnNodo = true;
-                errores++;
-                Registrador.RegistrarError("Problema en nodo MAN02. " + linNode.OuterXml);
+                agenciaVacia = true;
             }
             //Clave de Producto/Clave alterna de SAE
             nodoSel = linNode.SelectNodes("LIN.LIN/LIN03");
@@ -130,8 +133,15 @@ namespace PedidosEDISAE
             if (!errorEnNodo)
             {
                 //Procesar Nodo LIN
-                Registrador.Registrar("Encontrado detalle - NumeroAgencia(" + NumeroAgencia + ");ClaveProducto(" + ClaveProducto + ");Cantidad(" + Cantidad.ToString() + ");RAN(" + RAN + ");");
-                Archivo.AgregaNodoLIN(NumeroAgencia, ClaveProducto, Cantidad, RAN);
+                if (!agenciaVacia)
+                {
+                    Registrador.Registrar("Encontrado detalle - NumeroAgencia(" + NumeroAgencia + ");ClaveProducto(" + ClaveProducto + ");Cantidad(" + Cantidad.ToString() + ");RAN(" + RAN + ");");
+                    Archivo.AgregaNodoLIN(NumeroAgencia, ClaveProducto, Cantidad, RAN);
+                }
+                else
+                {
+                    Registrador.RegistrarAdvertencia("Nodo LIN ignorado debido a que agencia no fue especificada para el nodo con RAN '" + RAN + "'");
+                }
             }
             return errores;
         }

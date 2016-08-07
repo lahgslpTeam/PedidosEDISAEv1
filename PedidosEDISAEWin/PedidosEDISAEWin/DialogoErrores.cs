@@ -12,6 +12,7 @@ namespace PedidosEDISAEWin
     public partial class DialogoErrores : Form
     {
         public List<string> Errores { get;  set; }
+        public List<string> Advertencias { get; set; }
 
         public DialogoErrores()
         {
@@ -38,9 +39,22 @@ namespace PedidosEDISAEWin
         private void DialogoErrores_Load(object sender, EventArgs e)
         {
 			this.txtErrores.Text = "";
-            foreach (string error in Errores)
+            if (Advertencias.Count > 0)
             {
-                this.txtErrores.Text += error + Environment.NewLine;
+                this.txtErrores.Text += "LISTADO DE ADVERTENCIAS:" + Environment.NewLine;
+                foreach (string advertencia in Advertencias)
+                {
+                    this.txtErrores.Text += advertencia + Environment.NewLine;
+                }
+                this.txtErrores.Text += Environment.NewLine;
+            }
+            if (Errores.Count > 0)
+            {
+                this.txtErrores.Text += "LISTADO DE ERRORES:" + Environment.NewLine;
+                foreach (string error in Errores)
+                {
+                    this.txtErrores.Text += error + Environment.NewLine;
+                }
             }
         }
     }

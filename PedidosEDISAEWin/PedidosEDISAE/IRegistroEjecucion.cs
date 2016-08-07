@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PedidosEDISAE
 {
-    interface IRegistroEjecucion
+    public interface IRegistroEjecucion
     {
         void Registrar(string evento);
         void RegistrarError(string error);

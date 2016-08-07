@@ -9,7 +9,7 @@ namespace PedidosEDISAE
 {
     public class ProcesadorPedidosEDISAE
     {
-        static public List<string> ProcesaPedidos(List<string> archivosEDI)
+        static public IRegistroEjecucion ProcesaPedidos(List<string> archivosEDI)
         {
             Hashtable TiemposNormativos;
             
@@ -21,7 +21,7 @@ namespace PedidosEDISAE
             catch (Exception e)
             {
                 registrador.RegistrarError(e.Message);
-                return registrador.Errores();
+                return registrador;
             }
 
             registrador.Registrar("Pedidos EDI - SAE. Carga iniciada en " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Environment.NewLine);
@@ -39,7 +39,14 @@ namespace PedidosEDISAE
                     registrador.Registrar("Paso 2. Iniciando carga de archivo a SAE...");
                     if (cargador.CargarArchivoEDIaBD(parser.Archivo, TiemposNormativos) == 0)
                     {
-                        registrador.Registrar("Carga a SAE completada exitosamente");
+                        if (registrador.Advertencias().Count == 0)
+                        {
+                            registrador.Registrar("Carga a SAE completada exitosamente");
+                        }
+                        else
+                        {
+                            registrador.Registrar("Carga a SAE completada parcialmente. IMPORTANTE: Revisar advertencias en archivo de salida");
+                        }
                         //Mover archivo procesado a folder "RutaDestino"
                         string nuevoArchivo = ConfigurationManager.AppSettings["RutaDestino"];
                         if (!nuevoArchivo.EndsWith("\\"))
@@ -75,7 +82,7 @@ namespace PedidosEDISAE
                 //Separador entre archivo en el log
                 registrador.Registrar("");
             }
-            return registrador.Errores();
+            return registrador;
         }
     }
 }

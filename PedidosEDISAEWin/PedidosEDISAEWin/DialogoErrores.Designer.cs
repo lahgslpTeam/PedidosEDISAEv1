@@ -38,9 +38,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.txtErrores);
             this.panel1.Location = new System.Drawing.Point(12, 25);
             this.panel1.Name = "panel1";
@@ -75,7 +75,7 @@
             this.lblErrores.Size = new System.Drawing.Size(398, 13);
             this.lblErrores.TabIndex = 0;
             this.lblErrores.Text = "Se han encontrado los siguientes errores durante el procesamiento de los archivos" +
-                ":";
+    ":";
             // 
             // linkCarpetaRegistro
             // 
@@ -99,7 +99,7 @@
             this.Controls.Add(this.lblErrores);
             this.Controls.Add(this.panel1);
             this.Name = "DialogoErrores";
-            this.Text = "Errores en la carga de archivos";
+            this.Text = "Sucesos durante la carga de archivos";
             this.Load += new System.EventHandler(this.DialogoErrores_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

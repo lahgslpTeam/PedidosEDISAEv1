@@ -30,7 +30,15 @@ namespace PedidosEDISAEWin
 
         private void PedidosEDISAE_Load(object sender, EventArgs e)
         {
-            CargarRuta(ConfigurationManager.AppSettings["RutaDefault"]);
+            string ruta = ConfigurationManager.AppSettings["RutaDefault"];
+            if (System.IO.Directory.Exists(ruta))
+            {
+                CargarRuta(ruta);
+            }
+            else
+            {
+                MessageBox.Show("Ruta pre-configurada no existe: '" + ruta + "'. Revisar configuracion");
+            }
         }
 
         private void ListToListView(List<string> lista)
@@ -84,13 +92,14 @@ namespace PedidosEDISAEWin
             }
 
             //Llamada a proceso de carga de archivos
-            List<string> errores = ProcesadorPedidosEDISAE.ProcesaPedidos(listaArchivos);
+            IRegistroEjecucion registro = ProcesadorPedidosEDISAE.ProcesaPedidos(listaArchivos);
 
             //Mostrar errores al usuario en ventana especial:
-            if (errores.Count > 0)
+            if (registro.Advertencias().Count > 0 || registro.Errores().Count > 0)
             {
                 DialogoErrores errDialog = new DialogoErrores();
-                errDialog.Errores = errores;
+                errDialog.Advertencias = registro.Advertencias();
+                errDialog.Errores = registro.Errores();
                 errDialog.ShowDialog();
             }
 
