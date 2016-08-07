@@ -14,10 +14,12 @@ namespace PedidosEDISAE
         private string CadenaConexion;
         private IRegistroEjecucion Registrador;
         private string Num_Empresa = ConfigurationManager.AppSettings["NumEmpresaSAE"];
-        string SeriePedido = ConfigurationManager.AppSettings["SeriePedido"];
-        string ClaveVendedor = ConfigurationManager.AppSettings["ClaveVendedor"];
-        string ClaveCliente = ConfigurationManager.AppSettings["ClaveCliente"];
-
+        private string SeriePedido = ConfigurationManager.AppSettings["SeriePedido"];
+        private string ClaveVendedor = ConfigurationManager.AppSettings["ClaveVendedor"];
+        private string ClaveCliente = ConfigurationManager.AppSettings["ClaveCliente"];
+        private string ClaveUsuarioBitacora = ConfigurationManager.AppSettings["ClaveUsuarioBitacora"];
+        private string NombreUsuarioBitacora = ConfigurationManager.AppSettings["NombreUsuarioBitacora"];
+        
         public EDICargadorBD(string cadenaConexion, IRegistroEjecucion registrador)
         {
             Registrador = registrador;
@@ -37,7 +39,7 @@ namespace PedidosEDISAE
                 fbConexion = new FbConnection(this.CadenaConexion);
                 fbConexion.Open();
                 //Iniciar Transaccion 
-                fbTransaccion = fbConexion.BeginTransaction("Transaccion_InsertaPedido");
+                fbTransaccion = fbConexion.BeginTransaction("Transaccion_InsertaPedidos");
 
                 DataTable dtCliente = this.ObtenCliente(fbConexion, fbTransaccion, this.ClaveCliente);
                 DateTime Fecha_Documento = (DateTime)dtCliente.Rows[0]["fecha_Carga"];
@@ -48,47 +50,67 @@ namespace PedidosEDISAE
                     //Recorrer detalles a incluir en el pedido
                     //Preparar INSERTS de Pedido
                     decimal Subtotal = 0, SubTotal_Impuesto = 0;
-
+                    DataTable dtAgencia = null;
                     string Cve_Doc = "";
+                    string MensajeNoPocesar = "";
+                    bool procesar = true;
 
-                    //se obtiene el identificador que le sigue y se genera la clave de documento
-                    long NuevoIdentificador = this.Nuevo_Identificador(fbConexion, fbTransaccion, ref Cve_Doc);
-
-                    //Se Obtiene los datos de la Agencia, para determinar tiempo de entrega
-                    DataTable dtAgencia = this.ObtenCliente(fbConexion, fbTransaccion, pedido.NumeroAgencia);
-                    DateTime Fecha_entrega = this.CalcularFechaEntrega((string)dtAgencia.Rows[0]["Cve_Ciudad"], Fecha_Documento, TiemposNormativos);
-
-                    int partida = 1;
-
-                    foreach (ProductoEDI producto in pedido.Productos)
+                    try
                     {
-                        //Preparar INSERTS de Productos al Pedido
-                        //Se agrega maestro de partida y partida
-
-                        string ClaveArticulo = "";
-                        long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
-                        Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
-                        Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
-                                                                    , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
-
-                        //Se actualiza el campo 'pendientes por surtir' en el inventario
-                        Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
-
-                        partida++;
+                        dtAgencia = this.ObtenCliente(fbConexion, fbTransaccion, pedido.NumeroAgencia);
                     }
-                    //se agrega registra la informacion de envio
-                    long id_InformacionEnvio = this.Agrega_Informacion_Envio(fbConexion, fbTransaccion, dtAgencia, Fecha_entrega);
-                    Registros_afectados += id_InformacionEnvio > 0 ? 1 : 0;
+                    catch(Exception ex) {
+                        procesar = false; 
+                        MensajeNoPocesar="El pedido de la agencia con clave: '"+pedido.NumeroAgencia.ToString()+"' no se proceso debido a ' " + ex.Message +" ' " ;
+                    }
 
-                    //Se registra el movimiento en la Bitacora
-                    long Id_Bitacora = this.Agrega_registroBitacora(fbConexion, fbTransaccion, Cve_Doc, Subtotal + SubTotal_Impuesto, "Carga desde XML");
-                    Registros_afectados += Id_Bitacora > 0 ? 1 : 0;
 
-                    //No puedo seguir tu recomendacion de insertar al inicio el pedido, es necesario insertar aqui el pedido despues insertar las partidas y la bitacora
-                    Registros_afectados += this.AgregaCampoLibresDePedido(fbConexion, fbTransaccion, Cve_Doc);
-                    Registros_afectados += this.Agrega_Pedido(fbConexion, fbTransaccion, pedido, Cve_Doc, Subtotal, SubTotal_Impuesto, NuevoIdentificador, Id_Bitacora
-                                                              , (string)dtCliente.Rows[0]["RFC"], Fecha_Documento, Fecha_entrega, id_InformacionEnvio);
+                    if (procesar)
+                    {
+                        //se obtiene el identificador que le sigue y se genera la clave de documento
+                        long NuevoIdentificador = this.Nuevo_Identificador(fbConexion, fbTransaccion, ref Cve_Doc);
 
+                        //Se Obtiene los datos de la Agencia, para determinar tiempo de entrega
+
+                        DateTime Fecha_entrega = this.CalcularFechaEntrega((string)dtAgencia.Rows[0]["Cve_Ciudad"], Fecha_Documento, TiemposNormativos);
+
+                        int partida = 1;
+                        foreach (ProductoEDI producto in pedido.Productos)
+                        {
+                            //Preparar INSERTS de Productos al Pedido
+                            //Se agrega maestro de partida y partida
+
+                            string ClaveArticulo = "";
+                            long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
+                            Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
+                            Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
+                                                                        , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
+
+                            //Se actualiza el campo 'pendientes por surtir' en el inventario
+                            Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
+
+                            partida++;
+                        }
+                        //se agrega registra la informacion de envio
+                        long id_InformacionEnvio = this.Agrega_Informacion_Envio(fbConexion, fbTransaccion, dtAgencia, Fecha_Documento);
+                        Registros_afectados += id_InformacionEnvio > 0 ? 1 : 0;
+
+                        //Se registra el movimiento en la Bitacora
+                        long Id_Bitacora = this.Agrega_registroBitacora(fbConexion, fbTransaccion, Cve_Doc, Subtotal + SubTotal_Impuesto);
+                        Registros_afectados += Id_Bitacora > 0 ? 1 : 0;
+
+                        //No puedo seguir tu recomendacion de insertar al inicio el pedido, es necesario insertar aqui el pedido despues insertar las partidas y la bitacora
+                        Registros_afectados += this.AgregaCampoLibresDePedido(fbConexion, fbTransaccion, Cve_Doc);
+                        Registros_afectados += this.Agrega_Pedido(fbConexion, fbTransaccion, pedido, Cve_Doc, Subtotal, SubTotal_Impuesto, NuevoIdentificador, Id_Bitacora
+                                                                  , (string)dtCliente.Rows[0]["RFC"], Fecha_Documento, Fecha_entrega, id_InformacionEnvio);
+                    }
+                    else {
+                        foreach (ProductoEDI producto in pedido.Productos)
+                        {
+                            MensajeNoPocesar += " RAN no procesado '" + producto.RAN + "' ";
+                        }
+                        Registrador.RegistrarAdvertencia(MensajeNoPocesar);
+                    }
 
                 }
                 //Inicializar Conexion
@@ -160,7 +182,7 @@ namespace PedidosEDISAE
             }
             else
             {
-                throw new Exception("Clave Ciudad no encontrado: '" + ClaveCiudad + "'. Validar campo libre de cliente en la tabla Clientes para determinar la fecha de entrega.");
+                throw new Exception("Clave Ciudad no encontrado: '" + ClaveCiudad + "'. Validar campo libre de cliente en la tabla Clientes referente a 'Clave Ciudad' para determinar la fecha de entrega.");
             }
 
             return fechaEntrega;
@@ -209,13 +231,14 @@ namespace PedidosEDISAE
             FbCommand fbComando = new FbCommand("", fbConexion, fbTransaccion);
             DataTable dtCliente = new DataTable();
             FbDataAdapter fbDataAdaptador = new FbDataAdapter();
-            //string Texto_sql = "select CLAVE,NOMBRE,RFC,CVE_ZONA,CVE_ZONA_ENVIO from clie01 where CLAVE = @Clave";
             string Texto_sql = "";
 
-            Texto_sql += " select CLAVE,NOMBRE,RFC,CVE_ZONA,CVE_ZONA_ENVIO , coalesce(trim(libre.CAMPLIB9), '') Cve_Ciudad,coalesce(lista_prec, 1) CvePrecio,cast('Now' as date) fecha_Carga ";
-            Texto_sql += "     ,CALLE,NUMINT,NUMEXT,CRUZAMIENTOS,CRUZAMIENTOS2,LOCALIDAD POB, CURP, REFERDIR, CVE_ZONA";
-            Texto_sql += "     ,NULL STRNOGUIA,NULL STRMODOENV, NULL NOMBRE_RECEP,NULL NO_RECEP, NULL FECHA_RECEP,COLONIA";
-            Texto_sql += "     ,CODIGO,ESTADO,PAIS,MUNICIPIO";
+            //Texto_sql += " select CLAVE,NOMBRE,RFC,coalesce(trim(libre.CAMPLIB9), '') Cve_Ciudad,coalesce(lista_prec, 1) CvePrecio,cast('Now' as date) fecha_Carga ";
+            //Lista_prec siempre va a ser 1, y el campo libre a Usarse es CAMPLIB8
+            Texto_sql += " select CLAVE,NOMBRE,RFC,coalesce(trim(libre.CAMPLIB8), '') Cve_Ciudad,1 CvePrecio,cast('Now' as date) fecha_Carga ";
+            Texto_sql += "     ,coalesce(CALLE,'') CALLE,coalesce(NUMINT,'') NUMINT,coalesce(NUMEXT,'') NUMEXT,coalesce(CRUZAMIENTOS,'') CRUZAMIENTOS,coalesce(CRUZAMIENTOS2,'') CRUZAMIENTOS2,coalesce(LOCALIDAD,'') POB, CURP, coalesce(REFERDIR,'') REFERDIR, coalesce(CVE_ZONA,'') CVE_ZONA";
+            Texto_sql += "     ,'' STRNOGUIA,'' STRMODOENV, '' NOMBRE_RECEP,'' NO_RECEP, NULL FECHA_RECEP,coalesce(COLONIA,'') COLONIA";
+            Texto_sql += "     ,coalesce(CODIGO,'') CODIGO,coalesce(ESTADO,'') ESTADO,coalesce(PAIS,'') PAIS,coalesce(MUNICIPIO,'') MUNICIPIO";
             Texto_sql += " from clie" + this.Num_Empresa + " clie ";
             Texto_sql += "     left join clie_clib" + this.Num_Empresa + " libre on clie.clave = libre.cve_clie";
             Texto_sql += " where trim(CLAVE) = trim(@Clave)";
@@ -254,7 +277,7 @@ namespace PedidosEDISAE
             Texto_sql += "        , " + producto.Cantidad.ToString() + " * case when precioCliente.precio = 0 then precioPublico.precio else precioCliente.precio end *(impuesto4 / 100) TotImp4";
             Texto_sql += "        ,apart,uni_med,tipo_ele";
             Texto_sql += "        , " + producto.Cantidad.ToString() + " * case when precioCliente.precio = 0 then precioPublico.precio else precioCliente.precio end Tot_Partida";
-            Texto_sql += "        ,apl_man_imp,cuota_ieps,apl_man_ieps,inventario.cve_esqimpu cve_esq";
+            Texto_sql += "        ,apl_man_imp,coalesce(cuota_ieps,0) cuota_ieps,apl_man_ieps,inventario.cve_esqimpu cve_esq";
             Texto_sql += "        , descr, exist, cve_alter";
             Texto_sql += " from cves_alter" + this.Num_Empresa + " as alternas";
             Texto_sql += "      inner join inve" + this.Num_Empresa + " inventario on alternas.cve_art = inventario.cve_art";
@@ -274,7 +297,7 @@ namespace PedidosEDISAE
 
             if (dtArticulo.Rows.Count <= 0) throw new Exception("No se localizo un producto con la clave: '" + producto.ClaveProducto + "'.");
 
-            if (dtArticulo.Rows[0]["Precio"] == DBNull.Value) throw new Exception("Producto con clave: '" + producto.ClaveProducto + "' no tieneprecio definico, favor de definir precio.");
+            if (dtArticulo.Rows[0]["Precio"] == DBNull.Value) throw new Exception("Producto con clave: '" + producto.ClaveProducto + "' no tieneprecio definido, favor de definir precio.");
 
             if ((double)dtArticulo.Rows[0]["Precio"] == 0) throw new Exception("Producto con clave: " + producto.ClaveProducto + "' tiene precio definido en cero, favor de verificar.");
 
@@ -333,22 +356,23 @@ namespace PedidosEDISAE
             Texto_sql += " ) VALUES (";
             //Texto_sql += "  'P',@CVE_DOC,@CVE_CLPV,'O',0,@CVE_VEND,NULL,cast('Now' as date),cast('Now' as date)";
             //Texto_sql += " ,cast('Now' as date),NULL,@CAN_TOT,0,0,0,@IMP_TOT4,@DES_TOT,@DES_FIN";
-            Texto_sql += "  'P',@CVE_DOC,@CVE_CLPV,'O',0,@CVE_VEND,NULL,@FECHA_DOC,@FECHA_ENT";
+            Texto_sql += "  'P',@CVE_DOC,@CVE_CLPV,'O',0,@CVE_VEND,@CVE_PEDI,@FECHA_DOC,@FECHA_ENT";
             Texto_sql += " ,@FECHA_ENT,NULL,@CAN_TOT,0,0,0,@IMP_TOT4,0,0";
             Texto_sql += " ,0,NULL,@CVE_OBS,1,'S','N','O','O',1,1";
-            Texto_sql += " ,1,cast('Now' as date),0,@RFC,0,'N',0,@SERIE,@FOLIO,NULL,@DAT_ENVIO";
+            Texto_sql += " ,1,cast('Now' as timestamp),0,@RFC,0,'N',0,@SERIE,@FOLIO,'',@DAT_ENVIO";
             Texto_sql += " ,'N',@CVE_BITA,'N',NULL,0,0,@IMPORTE,0,NULL";
-            Texto_sql += " ,NULL,NULL,NULL,NULL,NULL,UUID_TO_CHAR(gen_uuid()),cast('Now' as date)";
+            Texto_sql += " ,NULL,'','',NULL,NULL,UUID_TO_CHAR(gen_uuid()),cast('Now' as timestamp)";
             Texto_sql += " )";
 
             fbComando.Parameters.AddWithValue("@CVE_DOC", Cve_Doc);
             fbComando.Parameters.AddWithValue("@CVE_CLPV", this.ClaveCliente);
             fbComando.Parameters.AddWithValue("@CVE_VEND", this.ClaveVendedor);
+            fbComando.Parameters.AddWithValue("@CVE_PEDI", "");                 //Por definir David, si lleva algo en la 'Clave Pedido'
             fbComando.Parameters.AddWithValue("@FECHA_DOC", Fecha_Doc);
             fbComando.Parameters.AddWithValue("@FECHA_ENT", Fecha_Entrega);
             fbComando.Parameters.AddWithValue("@CAN_TOT", Subtotal);
             fbComando.Parameters.AddWithValue("@IMP_TOT4", SubTotal_impuesto);
-            fbComando.Parameters.AddWithValue("@CVE_OBS", 0);              //Si no me comentan de RAN en pedido, por default es cero
+            fbComando.Parameters.AddWithValue("@CVE_OBS", 0);                   //Por default, el encabezado de los pedidos no lleva RAN/Observaciones
             fbComando.Parameters.AddWithValue("@RFC", RFC_Cliente);
             fbComando.Parameters.AddWithValue("@SERIE", this.SeriePedido);
             fbComando.Parameters.AddWithValue("@FOLIO", Identificador);
@@ -395,9 +419,9 @@ namespace PedidosEDISAE
             Texto_sql += " ) VALUES (";
             Texto_sql += " @CVE_DOC,@NUM_PAR,@CVE_ART,@CANT,@CANT,@PREC,@COST,0,0,0,@IMPU4,0";
             Texto_sql += " ,0,0,@IMP4APLA,0,0,0,@TOTIMP4,0,0,0";
-            Texto_sql += " ,0,@APAR,'N',1,NULL,1,@UNI_VENTA,@TIPO_PROD,@CVE_OBS";
+            Texto_sql += " ,0,@APAR,'N',1,'',1,@UNI_VENTA,@TIPO_PROD,@CVE_OBS";
             Texto_sql += " ,0,0,'N',0,@TOT_PARTIDA,'S','N',@APL_MAN_IMP";
-            Texto_sql += " ,@CUOTA_IEPS,@APL_MAN_IEPS,0,0,@CVE_ESQ,UUID_TO_CHAR(gen_uuid()),cast('Now' as date)";
+            Texto_sql += " ,@CUOTA_IEPS,@APL_MAN_IEPS,0,0,@CVE_ESQ,UUID_TO_CHAR(gen_uuid()),cast('Now' as timestamp)";
             Texto_sql += " )";
 
             fbComando.Parameters.AddWithValue("@CVE_DOC", Cve_Doc);
@@ -431,10 +455,11 @@ namespace PedidosEDISAE
             return Registros_afectados;
         }
 
-        private long Agrega_registroBitacora(FbConnection fbConexion, FbTransaction fbTransaccion, string Cve_Doc, decimal MontoTotal, string Nombre)
+        private long Agrega_registroBitacora(FbConnection fbConexion, FbTransaction fbTransaccion, string Cve_Doc, decimal MontoTotal)
         {
             FbCommand fbComando = new FbCommand("", fbConexion, fbTransaccion);
-            string Observacion = "No. [" + Cve_Doc + "] $ " + MontoTotal.ToString();
+            int Cve_Usuario = -1;
+            string Observacion = "No. [ " + Cve_Doc + " ] $ " + MontoTotal.ToString("0.00000");
             string Texto_sql = "select max(CVE_BITA) + 1 NuevoId from BITA" + this.Num_Empresa + " ";
 
             fbComando.CommandText = Texto_sql;
@@ -445,15 +470,21 @@ namespace PedidosEDISAE
             Texto_sql += " CVE_BITA,CVE_CLIE,CVE_CAMPANIA,CVE_ACTIVIDAD,FECHAHORA,CVE_USUARIO,OBSERVACIONES";
             Texto_sql += " ,STATUS,NOM_USUARIO";
             Texto_sql += " ) VALUES (";
-            Texto_sql += " @CVE_BITA,@CVE_CLIE,@CVE_CAMPANIA,'4',cast('Now' as date),@CVE_USUARIO,@OBSERVACIONES,'F',@NOM_USUARIO";
+            Texto_sql += " @CVE_BITA,@CVE_CLIE,@CVE_CAMPANIA,@CVE_ACTIVIDAD,cast('Now' as timestamp),@CVE_USUARIO,@OBSERVACIONES,'F',@NOM_USUARIO";
             Texto_sql += " )";
 
             fbComando.Parameters.AddWithValue("@CVE_BITA", Nuevo_idBitacora);
             fbComando.Parameters.AddWithValue("@CVE_CLIE", this.ClaveCliente);
             fbComando.Parameters.AddWithValue("@CVE_CAMPANIA", "_SAE_");
-            fbComando.Parameters.AddWithValue("@CVE_USUARIO", this.ClaveVendedor);
+            fbComando.Parameters.AddWithValue("@CVE_ACTIVIDAD", "    4");
+
+            if(int.TryParse(this.ClaveUsuarioBitacora,out Cve_Usuario))
+                fbComando.Parameters.AddWithValue("@CVE_USUARIO", Cve_Usuario);
+            else
+                throw new Exception("La clave de usuario : '" + this.ClaveUsuarioBitacora  + "' para bitácora no es un valor entero, favor de verificar.");
+
             fbComando.Parameters.AddWithValue("@OBSERVACIONES", Observacion);
-            fbComando.Parameters.AddWithValue("@NOM_USUARIO", Nombre);
+            fbComando.Parameters.AddWithValue("@NOM_USUARIO", this.NombreUsuarioBitacora );
 
             fbComando.CommandText = Texto_sql;
             fbComando.ExecuteNonQuery();
@@ -467,7 +498,7 @@ namespace PedidosEDISAE
         {
             FbCommand fbComando = new FbCommand("", fbConexion, fbTransaccion);
             int Registros_Afectados = 0;
-            string Texto_sql = "update foliosf" + this.Num_Empresa + " set ULT_DOC = @NuevoIdentificador, fech_ult_doc= cast('Now' as date) where trim(serie) = '" + this.SeriePedido + "' AND TIP_DOC = 'P' ";
+            string Texto_sql = "update foliosf" + this.Num_Empresa + " set ULT_DOC = @NuevoIdentificador, fech_ult_doc= cast('Now' as timestamp) where trim(serie) = '" + this.SeriePedido + "' AND TIP_DOC = 'P' ";
 
             fbComando.Parameters.AddWithValue("@NuevoIdentificador", Identificador);
 
@@ -570,11 +601,11 @@ namespace PedidosEDISAE
                 fbComando.Parameters.AddWithValue("@CURP", dtCliente.Rows[0]["CURP"]);
                 fbComando.Parameters.AddWithValue("@REFERDIR", dtCliente.Rows[0]["REFERDIR"]);
                 fbComando.Parameters.AddWithValue("@CVE_ZONA", dtCliente.Rows[0]["CVE_ZONA"]);
-                fbComando.Parameters.AddWithValue("@CVE_OBS", 0);
+                fbComando.Parameters.AddWithValue("@CVE_OBS", DBNull.Value);
                 fbComando.Parameters.AddWithValue("@STRNOGUIA", dtCliente.Rows[0]["STRNOGUIA"]);
                 fbComando.Parameters.AddWithValue("@STRMODOENV", dtCliente.Rows[0]["STRMODOENV"]);
-                //fbComando.Parameters.AddWithValue("@FECHA_ENV", FechaEnvio);
-                fbComando.Parameters.AddWithValue("@FECHA_ENV", DBNull.Value);
+                fbComando.Parameters.AddWithValue("@FECHA_ENV", FechaEnvio);
+                //fbComando.Parameters.AddWithValue("@FECHA_ENV", DBNull.Value);
                 fbComando.Parameters.AddWithValue("@NOMBRE_RECEP", dtCliente.Rows[0]["NOMBRE_RECEP"]);
                 fbComando.Parameters.AddWithValue("@NO_RECEP", dtCliente.Rows[0]["NO_RECEP"]);
                 fbComando.Parameters.AddWithValue("@FECHA_RECEP", dtCliente.Rows[0]["FECHA_RECEP"]);
