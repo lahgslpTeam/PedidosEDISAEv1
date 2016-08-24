@@ -19,7 +19,8 @@ namespace PedidosEDISAE
         private string ClaveCliente = ConfigurationManager.AppSettings["ClaveCliente"];
         private string ClaveUsuarioBitacora = ConfigurationManager.AppSettings["ClaveUsuarioBitacora"];
         private string NombreUsuarioBitacora = ConfigurationManager.AppSettings["NombreUsuarioBitacora"];
-        
+        private string Almacen = ConfigurationManager.AppSettings["Almacen"];
+
         public EDICargadorBD(string cadenaConexion, IRegistroEjecucion registrador)
         {
             Registrador = registrador;
@@ -377,7 +378,7 @@ namespace PedidosEDISAE
             fbComando.Parameters.AddWithValue("@CVE_DOC", Cve_Doc);
             fbComando.Parameters.AddWithValue("@CVE_CLPV", this.ClaveCliente);
             fbComando.Parameters.AddWithValue("@CVE_VEND", this.ClaveVendedor);
-            fbComando.Parameters.AddWithValue("@CVE_PEDI", "");                 //Por definir David, si lleva algo en la 'Clave Pedido'
+            fbComando.Parameters.AddWithValue("@CVE_PEDI", this.Almacen + "-" + pedido.NumeroAgencia);    //Por definir David, si lleva algo en la 'Clave Pedido' ==> definido Almacen-<man02>
             fbComando.Parameters.AddWithValue("@FECHA_DOC", Fecha_Doc);
             fbComando.Parameters.AddWithValue("@FECHA_ENT", Fecha_Entrega);
             fbComando.Parameters.AddWithValue("@CAN_TOT", Subtotal);
