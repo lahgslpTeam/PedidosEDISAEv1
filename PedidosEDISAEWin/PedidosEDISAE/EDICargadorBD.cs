@@ -90,16 +90,35 @@ namespace PedidosEDISAE
                             //Se agrega maestro de partida y partida
 
                             string ClaveArticulo = "";
-                            long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
-                            Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
-                            Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
-                                                                        , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
+                            bool ProcesarPartida = true;
+                            try
+                            {
+                                DataTable dtArticulo =  this.ObtenArticulo(fbConexion, fbTransaccion, producto, (int)dtCliente.Rows[0]["CvePrecio"]);
+                            }
+                            catch (Exception ex)
+                            {
+                                ProcesarPartida = false;
+                                Registrador.RegistrarAdvertencia("Número RAN no procesado:'"+producto.RAN+"' de la agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' debido a '" + ex.Message + "'.");
+                            }
 
-                            //Se actualiza el campo 'pendientes por surtir' en el inventario
-                            Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
+                            if (ProcesarPartida)
+                            {
 
-                            partida++;
+                                long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
+                                Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
+                                Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
+                                                                            , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
+
+                                //Se actualiza el campo 'pendientes por surtir' en el inventario
+                                Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
+
+                                partida++;
+                            }
                         }
+
+                        if (partida <= 1)
+                            Registrador.RegistrarAdvertencia("El pedido de agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' no proceso partida alguna, consulte registro de advertencias.");
+                       
                         //se agrega registra la informacion de envio
                         long id_InformacionEnvio = this.Agrega_Informacion_Envio(fbConexion, fbTransaccion, dtAgencia, Fecha_Documento);
                         Registros_afectados += id_InformacionEnvio > 0 ? 1 : 0;
@@ -419,7 +438,7 @@ namespace PedidosEDISAE
         {
             FbCommand fbComando = new FbCommand("", fbConexion, fbTransaccion);
             int Registros_afectados = 0;
-            DataTable dtArticulo = this.ObtenArticulo(fbConexion, fbTransaccion, producto, ClavePrecio);
+            DataTable dtArticulo = this.ObtenArticulo(fbConexion, fbTransaccion, producto, ClavePrecio);          
 
             string Texto_sql = " INSERT INTO PAR_FACTP" + this.Num_Empresa + " (";
             Texto_sql += " CVE_DOC,NUM_PAR,CVE_ART,CANT,PXS,PREC,COST,IMPU1,IMPU2,IMPU3,IMPU4,IMP1APLA";
@@ -462,7 +481,7 @@ namespace PedidosEDISAE
             fbComando.CommandText = Texto_sql;
 
             Registros_afectados = fbComando.ExecuteNonQuery();
-
+           
             return Registros_afectados;
         }
 
