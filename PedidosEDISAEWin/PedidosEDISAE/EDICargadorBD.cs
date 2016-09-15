@@ -73,7 +73,25 @@ namespace PedidosEDISAE
                         MensajeNoProcesado = "El pedido de agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' no procesado debido a '" + ex.Message + "'.";
                     }
 
-
+                    //Si se procesara el pedido se checa que existan los productos
+                    ArrayList ProductosNoExisten = new ArrayList();
+                    if (procesar) {
+                        foreach (ProductoEDI producto in pedido.Productos)
+                        {
+                            try
+                            {
+                                DataTable dtArticulo = this.ObtenArticulo(fbConexion, fbTransaccion, producto, (int)dtCliente.Rows[0]["CvePrecio"]);
+                            }
+                            catch (Exception ex) {
+                                ProductosNoExisten.Add(producto.ClaveProducto);  
+                                Registrador.RegistrarAdvertencia("Número RAN '" + producto.RAN + "' de agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' no procesado debido a '" + ex.Message + "'."); 
+                            }  
+                        }
+                        //Si todos los productos del pedido no existen, entonces no se procesa el pedido.
+                        procesar = ProductosNoExisten.Count == pedido.Productos.Count ? false : procesar;  
+                    }
+                    
+                    
                     if (procesar)
                     {
                         //se obtiene el identificador que le sigue y se genera la clave de documento
@@ -89,16 +107,19 @@ namespace PedidosEDISAE
                             //Preparar INSERTS de Productos al Pedido
                             //Se agrega maestro de partida y partida
 
-                            string ClaveArticulo = "";                          
-                            long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
-                            Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
-                            Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
-                                                                        , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
+                            if (!ProductosNoExisten.Contains(producto.ClaveProducto)) {
+                                string ClaveArticulo = "";
+                                long id_observacion = this.AgregaObservacion(fbConexion, fbTransaccion, producto.RAN);
+                                Registros_afectados += this.AgregaCamposLibresDePartida(fbConexion, fbTransaccion, Cve_Doc, partida);
+                                Registros_afectados += this.Agrega_Partida(fbConexion, fbTransaccion, producto, Cve_Doc, partida, ref Subtotal, ref SubTotal_Impuesto
+                                                                            , (int)dtCliente.Rows[0]["CvePrecio"], ref ClaveArticulo, id_observacion);
 
-                            //Se actualiza el campo 'pendientes por surtir' en el inventario
-                            Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
+                                //Se actualiza el campo 'pendientes por surtir' en el inventario
+                                Registros_afectados += this.Actualiza_Inventario(fbConexion, fbTransaccion, producto, ClaveArticulo, producto.Cantidad);
 
-                            partida++;                          
+                                partida++;
+                            }
+                    
                         }
                                                
                         //se agrega registra la informacion de envio
