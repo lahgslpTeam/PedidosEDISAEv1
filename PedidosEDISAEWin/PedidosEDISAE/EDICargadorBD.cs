@@ -76,19 +76,27 @@ namespace PedidosEDISAE
                     //Si se procesara el pedido se checa que existan los productos
                     ArrayList ProductosNoExisten = new ArrayList();
                     if (procesar) {
-                        foreach (ProductoEDI producto in pedido.Partidas)
+                        int NumeroPartidasRechazadas = 0;
+                        foreach (ProductoEDI producto in pedido.Productos)
                         {
                             try
                             {
                                 DataTable dtArticulo = this.ObtenArticulo(fbConexion, fbTransaccion, producto, (int)dtCliente.Rows[0]["CvePrecio"]);
                             }
                             catch (Exception ex) {
-                                ProductosNoExisten.Add(producto.ClaveProducto);  
+                                NumeroPartidasRechazadas++;
+                                if (!ProductosNoExisten.Contains(producto.ClaveProducto))
+                                {
+                                    ProductosNoExisten.Add(producto.ClaveProducto);
+                                }
                                 Registrador.RegistrarAdvertencia("Número RAN '" + producto.RAN + "' de agencia con clave: '" + pedido.NumeroAgencia.ToString() + "' no procesado debido a '" + ex.Message + "'."); 
                             }  
                         }
-                        //Si todos los productos del pedido no existen, entonces no se procesa el pedido.
-                        procesar = ProductosNoExisten.Count == pedido.Partidas.Count ? false : procesar;  
+                        //Si todos los productos del pedido no existen, entonces no se procesa el pedido. 
+                        if (NumeroPartidasRechazadas == pedido.Productos.Count)
+                        {
+                            procesar = false;
+                        }
                     }
                     
                     
@@ -102,7 +110,7 @@ namespace PedidosEDISAE
                         DateTime Fecha_entrega = this.CalcularFechaEntrega((string)dtAgencia.Rows[0]["Cve_Ciudad"], Fecha_Documento, TiemposNormativos);
 
                         int partida = 1;
-                        foreach (ProductoEDI producto in pedido.Partidas)
+                        foreach (ProductoEDI producto in pedido.Productos)
                         {
                             //Preparar INSERTS de Productos al Pedido
                             //Se agrega maestro de partida y partida
@@ -137,7 +145,7 @@ namespace PedidosEDISAE
                     }
                     else {
                         string RANs = "";
-                        foreach (ProductoEDI producto in pedido.Partidas)
+                        foreach (ProductoEDI producto in pedido.Productos)
                         {
                             RANs += producto.RAN + ",";
                         }
