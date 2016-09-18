@@ -22,6 +22,7 @@ namespace PedidosEDISAE
         public int ProcesaXml()
         {
             int errores = 0;
+            string RootElementName = "NMEX862R";
             if (NombreArchivo != "")
             {
                 XmlDocument doc = new XmlDocument();
@@ -29,18 +30,28 @@ namespace PedidosEDISAE
                 {
                     doc.Load(NombreArchivo);
                     XmlElement xelRoot = doc.DocumentElement;
-                    XmlNodeList xmlNodes = xelRoot.SelectNodes("/NIS830R/LIN");
+                    XmlNodeList xmlRootNode = xelRoot.SelectNodes("/" + RootElementName);
 
-                    if (xmlNodes.Count == 0)
+                    if (xmlRootNode.Count == 0)
                     {
-                        Registrador.RegistrarError("No se han encontrado nodos LIN en archivo '" + NombreArchivo + "'. Revisar formato.");
+                        Registrador.RegistrarError("Formato de archivo incorrecto, esta aplicacion solo soporta archivos '" + RootElementName + "'. Revisar formato. Formato encontrado: " + doc.DocumentElement.Name);
                         errores++;
                     }
                     else
                     {
-                        foreach (XmlNode linNode in xmlNodes)
+                        XmlNodeList xmlNodes = xelRoot.SelectNodes("/" + RootElementName + "/LIN");
+
+                        if (xmlNodes.Count == 0)
                         {
-                            errores += ParseLINNode(linNode);
+                            Registrador.RegistrarError("No se han encontrado nodos LIN en archivo '" + NombreArchivo + "'. Revisar formato.");
+                            errores++;
+                        }
+                        else
+                        {
+                            foreach (XmlNode linNode in xmlNodes)
+                            {
+                                errores += ParseLINNode(linNode);
+                            }
                         }
                     }
                 }
@@ -61,28 +72,10 @@ namespace PedidosEDISAE
         private int ParseLINNode(XmlNode linNode)
         {
             int errores = 0;
-            bool errorEnNodo = false;
-            bool agenciaVacia = false;
-            XmlNodeList nodoSel;
+            XmlNodeList nodosLINFST, nodoSel;
 
-            string NumeroAgencia = "";
             string ClaveProducto = "";
-            string RAN = "";
-            int Cantidad = 0;
-            //Numero de Agencia
-            nodoSel = linNode.SelectNodes("LIN.MAN/MAN02");
-            if (nodoSel.Count == 1)
-            {
-                NumeroAgencia = nodoSel[0].InnerText;
-                if (NumeroAgencia.Trim() == String.Empty)
-                {
-                    agenciaVacia = true;
-                }
-            }
-            else
-            {
-                agenciaVacia = true;
-            }
+
             //Clave de Producto/Clave alterna de SAE
             nodoSel = linNode.SelectNodes("LIN.LIN/LIN03");
             if (nodoSel.Count == 1)
@@ -91,57 +84,93 @@ namespace PedidosEDISAE
             }
             else
             {
-                errorEnNodo = true;
+                Registrador.RegistrarError("Problema al obtener clave de producto en nodo LIN. " + linNode.OuterXml);
                 errores++;
-                Registrador.RegistrarError("Problema en nodo LIN03. " + linNode.OuterXml);
-            }
-            //Cantidad Solicitada
-            nodoSel = linNode.SelectNodes("LIN.SDP/LIN.SDP.FST/LIN.SDP.FST.FST/FST01");
-            if (nodoSel.Count == 1)
-            {
-                try
-                {
-                    Cantidad = Convert.ToInt16(nodoSel[0].InnerText);
-                }
-                catch(Exception e)
-                {
-                    Cantidad = 0;
-                    errorEnNodo = true;
-                    errores++;
-                    Registrador.RegistrarError("Formato de número incorrecto en nodo FST01. " + linNode.OuterXml + ". Excepcion: " + e.Message);
-                }
-            }
-            else
-            {
-                errorEnNodo = true;
-                errores++;
-                Registrador.RegistrarError("Problema en nodo FST01. " + linNode.OuterXml);
-            }
-            //RAN que se captura en el campo Observaciones de la Partida en SAE
-            nodoSel = linNode.SelectNodes("LIN.SDP/LIN.SDP.FST/LIN.SDP.FST.FST/FST09");
-            if (nodoSel.Count == 1)
-            {
-                RAN = nodoSel[0].InnerText;
-            }
-            else
-            {
-                errorEnNodo = true;
-                errores++;
-                Registrador.RegistrarError("Problema en nodo FST09. " + linNode.OuterXml);
+                return errores;
             }
 
-            if (!errorEnNodo)
+            nodosLINFST = linNode.SelectNodes("LIN.FST");
+            if (nodosLINFST.Count > 0)
             {
-                //Procesar Nodo LIN
-                if (!agenciaVacia)
+                foreach (XmlNode fst in nodosLINFST)
                 {
-                    Registrador.Registrar("Encontrado detalle - NumeroAgencia(" + NumeroAgencia + ");ClaveProducto(" + ClaveProducto + ");Cantidad(" + Cantidad.ToString() + ");RAN(" + RAN + ");");
-                    Archivo.AgregaNodoLIN(NumeroAgencia, ClaveProducto, Cantidad, RAN);
+                    string NumeroAgencia = "";
+                    string RAN = "";
+                    int Cantidad = 0;
+
+                    bool errorEnNodo = false;
+                    bool agenciaVacia = false;
+
+                    //Cantidad Solicitada
+                    nodoSel = fst.SelectNodes("LIN.FST.FST/FST01");
+                    if (nodoSel.Count == 1)
+                    {
+                        try
+                        {
+                            Cantidad = Convert.ToInt16(nodoSel[0].InnerText);
+                        }
+                        catch (Exception e)
+                        {
+                            Cantidad = 0;
+                            errorEnNodo = true;
+                            errores++;
+                            Registrador.RegistrarError("Formato de número incorrecto en nodo FST01. " + linNode.OuterXml + ". Excepcion: " + e.Message);
+                        }
+                    }
+                    else
+                    {
+                        errorEnNodo = true;
+                        errores++;
+                        Registrador.RegistrarError("Problema en nodo FST01. " + fst.OuterXml);
+                    }
+
+                    //RAN que se captura en el campo Observaciones de la Partida en SAE
+                    nodoSel = fst.SelectNodes("LIN.FST.FST/FST09");
+                    if (nodoSel.Count == 1)
+                    {
+                        RAN = nodoSel[0].InnerText;
+                    }
+                    else
+                    {
+                        errorEnNodo = true;
+                        errores++;
+                        Registrador.RegistrarError("Problema en nodo FST09. " + fst.OuterXml);
+                    }
+
+                    //Numero de Agencia
+                    nodoSel = fst.SelectNodes("LIN.FST.SDQ/SDQ03");
+                    if (nodoSel.Count == 1)
+                    {
+                        NumeroAgencia = nodoSel[0].InnerText;
+                        if (NumeroAgencia.Trim() == String.Empty)
+                        {
+                            agenciaVacia = true;
+                        }
+                    }
+                    else
+                    {
+                        agenciaVacia = true;
+                    }
+
+                    if (!errorEnNodo)
+                    {
+                        //Procesar Nodo LIN
+                        if (!agenciaVacia)
+                        {
+                            Registrador.Registrar("Encontrado detalle - NumeroAgencia(" + NumeroAgencia + ");ClaveProducto(" + ClaveProducto + ");Cantidad(" + Cantidad.ToString() + ");RAN(" + RAN + ");");
+                            Archivo.AgregaNodoLIN(NumeroAgencia, ClaveProducto, Cantidad, RAN);
+                        }
+                        else
+                        {
+                            Registrador.RegistrarAdvertencia("Nodo LIN ignorado debido a que agencia no fue especificada para el nodo con RAN '" + RAN + "'");
+                        }
+                    }
                 }
-                else
-                {
-                    Registrador.RegistrarAdvertencia("Nodo LIN ignorado debido a que agencia no fue especificada para el nodo con RAN '" + RAN + "'");
-                }
+            }
+            else
+            {
+                Registrador.RegistrarError("Problema al obtener detalles en nodo LIN para producto '" + ClaveProducto + "'. " + linNode.OuterXml);
+                errores++;
             }
             return errores;
         }

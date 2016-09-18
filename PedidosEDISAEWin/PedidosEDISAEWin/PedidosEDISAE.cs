@@ -30,6 +30,8 @@ namespace PedidosEDISAEWin
 
         private void PedidosEDISAE_Load(object sender, EventArgs e)
         {
+            this.Text += " - V. " + typeof(PedidosEDISAE).Assembly.GetName().Version;   //Para mostrar la version
+
             string ruta = ConfigurationManager.AppSettings["RutaDefault"];
             if (System.IO.Directory.Exists(ruta))
             {

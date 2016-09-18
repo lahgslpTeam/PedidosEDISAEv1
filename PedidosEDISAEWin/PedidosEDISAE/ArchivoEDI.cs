@@ -34,7 +34,7 @@ namespace PedidosEDISAE
         public void AgregaNodoLIN(string NumeroAgencia, string ClaveProducto, int Cantidad, string RAN)
         {
             PedidoEDI pedido = ObtenerPedidoDeAgencia(NumeroAgencia);
-            pedido.AgregarProducto(ClaveProducto, Cantidad, RAN);
+            pedido.AgregarPartida(ClaveProducto, Cantidad, RAN);
         }
     }
 }

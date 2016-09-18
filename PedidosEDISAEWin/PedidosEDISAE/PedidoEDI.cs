@@ -8,17 +8,17 @@ namespace PedidosEDISAE
     {
         public string NumeroAgencia { get; set; }
 
-        public List<ProductoEDI> Productos { get; set; }
+        public List<ProductoEDI> Partidas { get; set; }
 
         public PedidoEDI(string numeroAgencia)
         {
             NumeroAgencia = numeroAgencia;
-            Productos = new List<ProductoEDI>();
+            Partidas = new List<ProductoEDI>();
         }
 
-        public void AgregarProducto(string ClaveProducto, int Cantidad, string RAN)
+        public void AgregarPartida(string ClaveProducto, int Cantidad, string RAN)
         {
-            Productos.Add(new ProductoEDI(ClaveProducto, Cantidad, RAN));
+            Partidas.Add(new ProductoEDI(ClaveProducto, Cantidad, RAN));
         }
     }
 }

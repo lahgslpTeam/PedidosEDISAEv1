@@ -76,7 +76,7 @@ namespace PedidosEDISAE
                     //Si se procesara el pedido se checa que existan los productos
                     ArrayList ProductosNoExisten = new ArrayList();
                     if (procesar) {
-                        foreach (ProductoEDI producto in pedido.Productos)
+                        foreach (ProductoEDI producto in pedido.Partidas)
                         {
                             try
                             {
@@ -88,7 +88,7 @@ namespace PedidosEDISAE
                             }  
                         }
                         //Si todos los productos del pedido no existen, entonces no se procesa el pedido.
-                        procesar = ProductosNoExisten.Count == pedido.Productos.Count ? false : procesar;  
+                        procesar = ProductosNoExisten.Count == pedido.Partidas.Count ? false : procesar;  
                     }
                     
                     
@@ -102,7 +102,7 @@ namespace PedidosEDISAE
                         DateTime Fecha_entrega = this.CalcularFechaEntrega((string)dtAgencia.Rows[0]["Cve_Ciudad"], Fecha_Documento, TiemposNormativos);
 
                         int partida = 1;
-                        foreach (ProductoEDI producto in pedido.Productos)
+                        foreach (ProductoEDI producto in pedido.Partidas)
                         {
                             //Preparar INSERTS de Productos al Pedido
                             //Se agrega maestro de partida y partida
@@ -137,7 +137,7 @@ namespace PedidosEDISAE
                     }
                     else {
                         string RANs = "";
-                        foreach (ProductoEDI producto in pedido.Productos)
+                        foreach (ProductoEDI producto in pedido.Partidas)
                         {
                             RANs += producto.RAN + ",";
                         }
