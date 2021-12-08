@@ -1,171 +1,199 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TiemposNormativos>
 <Ciudad name='AGUASCALIENTES' estado='AGUASCALIENTES'><Clave>43</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='ENSENADA' estado='BAJA CALIFORNIA'><Clave>63</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
-<Ciudad name='MEXICALI' estado='BAJA CALIFORNIA'><Clave>79</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='ENSENADA' estado='BAJA CALIFORNIA'><Clave>63</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
+<Ciudad name='MEXICALI' estado='BAJA CALIFORNIA'><Clave>79</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='TECATE' estado='BAJA CALIFORNIA'><Clave>48687</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
-<Ciudad name='TIJUANA' estado='BAJA CALIFORNIA'><Clave>103</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='LA PAZ' estado='BAJA CALIFORNIA SUR'><Clave>48780</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='SAN JOSE DEL CABO' estado='BAJA CALIFORNIA SUR'><Clave>48673</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='TIJUANA' estado='BAJA CALIFORNIA'><Clave>103</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='LA PAZ' estado='BAJA CALIFORNIA SUR'><Clave>48780</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
+<Ciudad name='SAN JOSE DEL CABO' estado='BAJA CALIFORNIA SUR'><Clave>49723</Clave><TiempoLogistica>9</TiempoLogistica></Ciudad>
 <Ciudad name='CAMPECHE' estado='CAMPECHE'><Clave>45</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='CD. DEL CARMEN' estado='CAMPECHE'><Clave>1312</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='ARRIAGA' estado='CHIAPAS'><Clave>48580</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='COMITAN DE DOMINGUEZ' estado='CHIAPAS'><Clave>48598</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='COMITAN' estado='CHIAPAS'><Clave>48598</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='PALENQUE' estado='CHIAPAS'><Clave>48651</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
-<Ciudad name='SAN CRISTOBAL DE LAS CASAS' estado='CHIAPAS'><Clave>1315</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='SAN CRISTOBAL DE LAS CASAS' estado='CHIAPAS'><Clave>1315</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
 <Ciudad name='TAPACHULA' estado='CHIAPAS'><Clave>48554</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='TUXTLA GUTIERREZ' estado='CHIAPAS'><Clave>2209</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='CD. CUAUHTEMOC' estado='CHIHUAHUA'><Clave>47040</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='TUXTLA GUTIERREZ' estado='CHIAPAS'><Clave>2209</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='CD. CUAUHTEMOC' estado='CHIHUAHUA'><Clave>47040</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
 <Ciudad name='CD. JUAREZ' estado='CHIHUAHUA'><Clave>47</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='CHIHUAHUA' estado='CHIHUAHUA'><Clave>60</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='DELICIAS' estado='CHIHUAHUA'><Clave>48736</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='HIDALGO DEL PARRAL' estado='CHIHUAHUA'><Clave>48616</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='CHIHUAHUA' estado='CHIHUAHUA'><Clave>60</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='DELICIAS' estado='CHIHUAHUA'><Clave>48736</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='HIDALGO DEL PARRAL' estado='CHIHUAHUA'><Clave>48616</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='OJINAGA' estado='CHIHUAHUA'><Clave>48648</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='ACUÑA' estado='COAHUILA'><Clave>49733</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='MATAMOROS' estado='COAHUILA'><Clave>49636</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
-<Ciudad name='MONCLOVA' estado='COAHUILA'><Clave>1676</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='MONCLOVA' estado='COAHUILA'><Clave>1676</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='PIEDRAS NEGRAS' estado='COAHUILA'><Clave>88</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='SALTILLO' estado='COAHUILA'><Clave>93</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TORREON' estado='COAHUILA'><Clave>106</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='TORREON' estado='COAHUILA'><Clave>106</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='SABINAS' estado='COAHUILA'><Clave>47039</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='COLIMA' estado='COLIMA'><Clave>53</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='MANZANILLO' estado='COLIMA'><Clave>75</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='MANZANILLO' estado='COLIMA'><Clave>75</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='TECOMAN' estado='COLIMA'><Clave>48688</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='VILLA DE ALVAREZ' estado='COLIMA'><Clave>49429</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='MEXICO' estado='DISTRITO FEDERAL'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='DURANGO' estado='DURANGO'><Clave>62</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='GOMEZ PALACIO' estado='DURANGO'><Clave>122</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='DURANGO' estado='DURANGO'><Clave>62</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='GOMEZ PALACIO' estado='DURANGO'><Clave>122</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='CHALCO' estado='ESTADO DE MEXICO'><Clave>46412</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='METEPEC' estado='ESTADO DE MEXICO'><Clave>1152</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='TECAMAC' estado='ESTADO DE MEXICO'><Clave>47835</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TEXCOCO' estado='ESTADO DE MEXICO'><Clave>102</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='TECAMAC' estado='ESTADO DE MEXICO'><Clave>47835</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='TEXCOCO' estado='ESTADO DE MEXICO'><Clave>102</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='TOLUCA' estado='ESTADO DE MEXICO'><Clave>105</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='ZUMPANGO' estado='ESTADO DE MEXICO'><Clave>50285</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='ZUMPANGO' estado='ESTADO DE MEXICO'><Clave>50285</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='ATIZAPAN DE ZARAGOZA' estado='ESTADO DE MEXICO (2)'><Clave>1195</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='COACALCO DE BERRIOZABAL' estado='ESTADO DE MEXICO (2)'><Clave>50225</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='CUAUTITLAN IZCALLI' estado='ESTADO DE MEXICO (2)'><Clave>3706</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='ECATEPEC DE MORELOS' estado='ESTADO DE MEXICO (2)'><Clave>1196</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='HUIXQUILUCAN' estado='ESTADO DE MEXICO (2)'><Clave>1311</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='IXTAPALUCA' estado='ESTADO DE MEXICO (2)'><Clave>1198</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='NAUCALPAN DE JUAREZ' estado='ESTADO DE MEXICO (2)'><Clave>1555</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='IXTAPALUCA' estado='ESTADO DE MEXICO (2)'><Clave>1198</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='NAUCALPAN DE JUAREZ' estado='ESTADO DE MEXICO (2)'><Clave>1311</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='TLALNEPANTLA DE BAZ' estado='ESTADO DE MEXICO (2)'><Clave>1439</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='ATLACOMULCO' estado='ESTADO DE MEXICO'><Clave>3877</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='CALIMAYA' estado='ESTADO DE MEXICO'><Clave>50218</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='TENANCINGO' estado='ESTADO DE MEXICO'><Clave>98</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='OCOYOACAC' estado='ESTADO DE MEXICO'><Clave>44337</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='ACAMBARO' estado='GUANAJUATO'><Clave>48709</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='CELAYA' estado='GUANAJUATO'><Clave>46</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='GUANAJUATO' estado='GUANAJUATO'><Clave>65</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='IRAPUATO' estado='GUANAJUATO'><Clave>1805</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='LEON' estado='GUANAJUATO'><Clave>72</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='SALAMANCA' estado='GUANAJUATO'><Clave>3378</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='SAN MIGUEL DE ALLENDE' estado='GUANAJUATO'><Clave>44271</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='SILAO' estado='GUANAJUATO'><Clave>3685</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='SAN MIGUEL DE ALLENDE' estado='GUANAJUATO'><Clave>44271</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='SILAO' estado='GUANAJUATO'><Clave>3685</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='URIANGATO' estado='GUANAJUATO'><Clave>49977</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='ACAPULCO DE JUAREZ' estado='GUERRERO'><Clave>46450</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='ACAPULCO DE JUAREZ' estado='GUERRERO'><Clave>46450</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='PUNGARABATO (CD. ALTAMIRANO)' estado='GUERRERO'><Clave>50029</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='CHILPANCINGO DE LOS BRAVO' estado='GUERRERO'><Clave>49995</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='IGUALA DE LA INDEPENDENCIA' estado='GUERRERO'><Clave>50014</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='TLAPA DE COMONFORT' estado='GUERRERO'><Clave>50043</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='ZIHUATANEJO DE AZUETA' estado='GUERRERO'><Clave>48544</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='CHILPANCINGO DE LOS BRAVO' estado='GUERRERO'><Clave>49995</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='IGUALA DE LA INDEPENDENCIA' estado='GUERRERO'><Clave>50014</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='TLAPA DE COMONFORT' estado='GUERRERO'><Clave>50043</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='ZIHUATANEJO DE AZUETA' estado='GUERRERO'><Clave>48544</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='PACHUCA DE SOTO' estado='HIDALGO'><Clave>46616</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='TULA DE ALLENDE' estado='HIDALGO'><Clave>48778</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TULANCINGO DE BRAVO' estado='HIDALGO'><Clave>50112</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='AUTLAN DE NAVARRO' estado='JALISCO'><Clave>50129</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='CD. GUZMAN' estado='JALISCO'><Clave>44442</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='TULA DE ALLENDE' estado='HIDALGO'><Clave>48778</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='TULANCINGO DE BRAVO' estado='HIDALGO'><Clave>50112</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='AUTLAN DE NAVARRO' estado='JALISCO'><Clave>50129</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
+<Ciudad name='CD. GUZMAN' estado='JALISCO'><Clave>53800</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='GUADALAJARA' estado='JALISCO'><Clave>1313</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='LAGOS DE MORENO' estado='JALISCO'><Clave>48125</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='OCOTLAN' estado='JALISCO'><Clave>47101</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='OCOTLAN' estado='JALISCO'><Clave>47101</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='PUERTO VALLARTA' estado='JALISCO'><Clave>90</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='SAN JUAN DE LOS LAGOS' estado='JALISCO'><Clave>48485</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='TEPATITLAN DE MORELOS' estado='JALISCO'><Clave>45344</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='SAN JUAN DE LOS LAGOS' estado='JALISCO'><Clave>48485</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='TEPATITLAN DE MORELOS' estado='JALISCO'><Clave>45344</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='TUXPAN' estado='JALISCO'><Clave>48837</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='ZAPOPAN' estado='JALISCO'><Clave>117</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='APATZINGAN' estado='MICHOACAN'><Clave>48577</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='LA PIEDAD' estado='MICHOACAN'><Clave>71</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='LAZARO CARDENAS' estado='MICHOACAN'><Clave>1319</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='TLAJOMULCO DE ZUÑIGA' estado='JALISCO'><Clave>44574</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='TONALA' estado='JALISCO'><Clave>4091</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='APATZINGAN' estado='MICHOACAN'><Clave>48577</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='LA PIEDAD' estado='MICHOACAN'><Clave>71</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='LAZARO CARDENAS' estado='MICHOACAN'><Clave>1319</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='MORELIA' estado='MICHOACAN'><Clave>83</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='NUEVA ITALIA' estado='MICHOACAN'><Clave>52102</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
 <Ciudad name='SAHUAYO' estado='MICHOACAN'><Clave>48738</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='URUAPAN' estado='MICHOACAN'><Clave>109</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='ZAMORA' estado='MICHOACAN'><Clave>1804</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='ZITACUARO' estado='MICHOACAN'><Clave>48549</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='URUAPAN' estado='MICHOACAN'><Clave>109</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='ZAMORA' estado='MICHOACAN'><Clave>1804</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='ZITACUARO' estado='MICHOACAN'><Clave>48549</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='CUAUTLA' estado='MORELOS'><Clave>2203</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='CUERNAVACA' estado='MORELOS'><Clave>57</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='ZACATEPEC' estado='MORELOS'><Clave>48788</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='BAHIA DE BANDERAS' estado='NAYARIT'><Clave>49588</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='ZACATEPEC' estado='MORELOS'><Clave>48788</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='BAHIA DE BANDERAS' estado='NAYARIT'><Clave>49588</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='TEPIC' estado='NAYARIT'><Clave>44272</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='TUXPAN' estado='NAYARIT'><Clave>48787</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='GUADALUPE' estado='NUEVO LEON'><Clave>3272</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='LINARES' estado='NUEVO LEON'><Clave>46323</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='MONTERREY' estado='NUEVO LEON'><Clave>82</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='SAN PEDRO GARZA GARCIA' estado='NUEVO LEON'><Clave>121</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='SANTA CATARINA' estado='NUEVO LEON'><Clave>44277</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='SANTA CATARINA' estado='NUEVO LEON'><Clave>44277</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='SAN NICOLAS DE LOS GARZA' estado='NUEVO LEON'><Clave>44121</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='HUAJUAPAN DE LEON' estado='OAXACA'><Clave>48617</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='JUCHITAN DE ZARAGOZA' estado='OAXACA'><Clave>50495</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='JUCHITAN DE ZARAGOZA' estado='OAXACA'><Clave>50495</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='OAXACA DE JUAREZ' estado='OAXACA'><Clave>46600</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='SALINA CRUZ' estado='OAXACA'><Clave>48668</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='SAN PEDRO MIXTEPEC-JUQUILA' estado='OAXACA'><Clave>50766</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='SALINA CRUZ' estado='OAXACA'><Clave>48668</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='SAN PEDRO MIXTEPEC-JUQUILA' estado='OAXACA'><Clave>50766</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
 <Ciudad name='SANTA MARIA HUATULCO' estado='OAXACA'><Clave>49446</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='TUXTEPEC' estado='OAXACA'><Clave>46438</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='ATLIXCO' estado='PUEBLA'><Clave>5880</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='HUAUCHINANGO' estado='PUEBLA'><Clave>48620</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='TUXTEPEC' estado='OAXACA'><Clave>46438</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='PINOTEPA NACIONAL' estado='OAXACA'><Clave>50929</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='BAHIAS DE HUATULCO' estado='OAXACA'><Clave>49446</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='ATLIXCO' estado='PUEBLA'><Clave>5880</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='HUAUCHINANGO' estado='PUEBLA'><Clave>48620</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='HUEJOTZINGO' estado='PUEBLA'><Clave>45463</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='IZUCAR DE MATAMOROS' estado='PUEBLA'><Clave>48626</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='IZUCAR DE MATAMOROS' estado='PUEBLA'><Clave>48626</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='PUEBLA' estado='PUEBLA'><Clave>89</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='SAN ANDRES CHOLULA' estado='PUEBLA'><Clave>6818</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='SAN MARTIN TEXMELUCAN' estado='PUEBLA'><Clave>125</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='SAN PEDRO CHOLULA' estado='PUEBLA'><Clave>47750</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='TEHUACAN' estado='PUEBLA'><Clave>97</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TEZIUTLAN' estado='PUEBLA'><Clave>45878</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='TEHUACAN' estado='PUEBLA'><Clave>125</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='TEZIUTLAN' estado='PUEBLA'><Clave>45878</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='ZACAPOAXTLA' estado='PUEBLA'><Clave>126</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
 <Ciudad name='ZACATLAN' estado='PUEBLA'><Clave>48706</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='QUERETARO' estado='QUERETARO'><Clave>91</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
-<Ciudad name='SAN JUAN DEL RIO' estado='QUERETARO'><Clave>94</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='SAN JUAN DEL RIO' estado='QUERETARO'><Clave>91</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='BENITO JUAREZ' estado='QUINTANA ROO'><Clave>51218</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='CANCUN' estado='QUINTANA ROO'><Clave>120</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='CHETUMAL' estado='QUINTANA ROO'><Clave>59</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='CANCUN' estado='QUINTANA ROO'><Clave>51218</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='CHETUMAL' estado='QUINTANA ROO'><Clave>51221</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='COZUMEL' estado='QUINTANA ROO'><Clave>55</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='SOLIDARIDAD' estado='QUINTANA ROO'><Clave>47622</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='SOLIDARIDAD' estado='QUINTANA ROO'><Clave>47622</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='BENITO JUAREZ, CANCUN' estado='QUINTANA ROO'><Clave>51218</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
 <Ciudad name='CIUDAD VALLES' estado='SAN LUIS POTOSI'><Clave>51234</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='MATEHUALA' estado='SAN LUIS POTOSI'><Clave>46889</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='SAN LUIS POTOSI' estado='SAN LUIS POTOSI'><Clave>95</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 <Ciudad name='CULIACAN' estado='SINALOA'><Clave>58</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='GUAMUCHIL' estado='SINALOA'><Clave>49424</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='GUASAVE' estado='SINALOA'><Clave>48613</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='LOS MOCHIS' estado='SINALOA'><Clave>73</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='GUAMUCHIL' estado='SINALOA'><Clave>51280</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='GUASAVE' estado='SINALOA'><Clave>48613</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='LOS MOCHIS' estado='SINALOA'><Clave>51274</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='MAZATLAN' estado='SINALOA'><Clave>77</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='CD. OBREGON' estado='SONORA'><Clave>46677</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='GUAYMAS' estado='SONORA'><Clave>1317</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='CD. OBREGON' estado='SONORA'><Clave>48645</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='GUAYMAS' estado='SONORA'><Clave>1317</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='HERMOSILLO' estado='SONORA'><Clave>67</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='MAGDALENA DE KINO' estado='SONORA'><Clave>49451</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='MAGDALENA DE KINO' estado='SONORA'><Clave>49451</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
 <Ciudad name='NAVOJOA' estado='SONORA'><Clave>48645</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='NOGALES' estado='SONORA'><Clave>84</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='SAN LUIS RIO COLORADO' estado='SONORA'><Clave>48674</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='NOGALES' estado='SONORA'><Clave>84</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='SAN LUIS RIO COLORADO' estado='SONORA'><Clave>48674</Clave><TiempoLogistica>9</TiempoLogistica></Ciudad>
 <Ciudad name='CARDENAS' estado='TABASCO'><Clave>48587</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='VILLAHERMOSA' estado='TABASCO'><Clave>876</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='ALTAMIRA' estado='TAMAULIPAS'><Clave>1094</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='ALTAMIRA' estado='TAMAULIPAS'><Clave>1094</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='CIUDAD MANTE' estado='TAMAULIPAS'><Clave>51357</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='CIUDAD MADERO' estado='TAMAULIPAS'><Clave>51355</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='MATAMOROS' estado='TAMAULIPAS'><Clave>76</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='CIUDAD MADERO' estado='TAMAULIPAS'><Clave>51355</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='MATAMOROS' estado='TAMAULIPAS'><Clave>76</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='NUEVO LAREDO' estado='TAMAULIPAS'><Clave>1197</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='REYNOSA' estado='TAMAULIPAS'><Clave>92</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='RIO BRAVO' estado='TAMAULIPAS'><Clave>48665</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TAMPICO' estado='TAMAULIPAS'><Clave>96</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='VICTORIA' estado='TAMAULIPAS'><Clave>51379</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='APIZACO' estado='TLAXCALA'><Clave>48578</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='RIO BRAVO' estado='TAMAULIPAS'><Clave>48665</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='TAMPICO' estado='TAMAULIPAS'><Clave>96</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='VICTORIA' estado='TAMAULIPAS'><Clave>51379</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='MIGUEL ALEMAN' estado='TAMAULIPAS'><Clave>51369</Clave><TiempoLogistica>7</TiempoLogistica></Ciudad>
+<Ciudad name='APIZACO' estado='TLAXCALA'><Clave>51433</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='LAZARO CARDENAS' estado='TLAXCALA'><Clave>51399</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='ACAYUCAN' estado='VERACRUZ'><Clave>48558</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='BOCA DEL RIO' estado='VERACRUZ'><Clave>1324</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='CORDOBA' estado='VERACRUZ'><Clave>54</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='COATZACOALCOS' estado='VERACRUZ'><Clave>51</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='MARTINEZ DE LA TORRE' estado='VERACRUZ'><Clave>48555</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='MINATITLAN' estado='VERACRUZ'><Clave>81</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='ACAYUCAN' estado='VERACRUZ'><Clave>48558</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='BOCA DEL RIO' estado='VERACRUZ'><Clave>1324</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='CORDOBA' estado='VERACRUZ'><Clave>54</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='COATZACOALCOS' estado='VERACRUZ'><Clave>51</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='MARTINEZ DE LA TORRE' estado='VERACRUZ'><Clave>48555</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='MINATITLAN' estado='VERACRUZ'><Clave>81</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='NOGALES' estado='VERACRUZ'><Clave>51538</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='ORIZABA' estado='VERACRUZ'><Clave>86</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
-<Ciudad name='PEROTE' estado='VERACRUZ'><Clave>48655</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
+<Ciudad name='ORIZABA' estado='VERACRUZ'><Clave>86</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='PEROTE' estado='VERACRUZ'><Clave>48655</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
 <Ciudad name='POZA RICA DE HIDALGO' estado='VERACRUZ'><Clave>51549</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='SAN ANDRES TUXTLA' estado='VERACRUZ'><Clave>48669</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
-<Ciudad name='TIERRA BLANCA' estado='VERACRUZ'><Clave>48694</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='TUXPAN' estado='VERACRUZ'><Clave>48553</Clave><TiempoLogistica>4</TiempoLogistica></Ciudad>
-<Ciudad name='VERACRUZ' estado='VERACRUZ'><Clave>110</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='SAN ANDRES TUXTLA' estado='VERACRUZ'><Clave>48669</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='TIERRA BLANCA' estado='VERACRUZ'><Clave>48694</Clave><TiempoLogistica>6</TiempoLogistica></Ciudad>
+<Ciudad name='TUXPAN' estado='VERACRUZ'><Clave>48553</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='VERACRUZ' estado='VERACRUZ'><Clave>110</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
 <Ciudad name='XALAPA' estado='VERACRUZ'><Clave>49280</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
 <Ciudad name='MERIDA' estado='YUCATAN'><Clave>78</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='FRESNILLO' estado='ZACATECAS'><Clave>1320</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
-<Ciudad name='GUADALUPE' estado='ZACATECAS'><Clave>48058</Clave><TiempoLogistica>2</TiempoLogistica></Ciudad>
+<Ciudad name='FRESNILLO' estado='ZACATECAS'><Clave>1320</Clave><TiempoLogistica>5</TiempoLogistica></Ciudad>
+<Ciudad name='GUADALUPE' estado='ZACATECAS'><Clave>48058</Clave><TiempoLogistica>3</TiempoLogistica></Ciudad>
+<Ciudad name='TLAJOMULCO DE ZÚÑIGA' estado='JALISCO'><Clave>45645</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='MIGUEL HIDALGO' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='IZTAPALAPA' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='TLAHUAC' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='GUSTAVO A MADERO' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='BENITO JUAREZ' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='XOCHIMILCO' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='TLALPAN' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='AZCAPOTZALCO' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='COYOACAN' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='ALVARO OBREGON' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='CUAJIMALPA' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='IZTACALCO' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='CUAUHTEMOC' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
+<Ciudad name='VENUSTIANO CARRANZA' estado='CDMX'><Clave>1</Clave><TiempoLogistica>1</TiempoLogistica></Ciudad>
 </TiemposNormativos>
